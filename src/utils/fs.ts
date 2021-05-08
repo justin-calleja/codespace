@@ -15,3 +15,5 @@ export const createDir = (dirPath: string): boolean => {
   }
   return false;
 };
+
+export { readFileSync } from 'fs';

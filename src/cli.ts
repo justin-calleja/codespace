@@ -28,14 +28,14 @@ const main = () => {
 
   const parsedArgvLookup = Object.fromEntries(namedParsedArgvs);
 
-  console.log(
-    chalk.blue('fullyQualifiedCmdNameToRun:'),
-    fullyQualifiedCmdNameToRun,
-  );
-  console.log(
-    chalk.blue('parsedArgvLookup:'),
-    JSON.stringify(parsedArgvLookup, null, 2),
-  );
+  //   console.log(
+  //     chalk.blue('fullyQualifiedCmdNameToRun:'),
+  //     fullyQualifiedCmdNameToRun,
+  //   );
+  //   console.log(
+  //     chalk.blue('parsedArgvLookup:'),
+  //     JSON.stringify(parsedArgvLookup, null, 2),
+  //   );
 
   switch (fullyQualifiedCmdNameToRun) {
     case codespaceCmd.fqn: {
