@@ -3,7 +3,21 @@
 ## new
 
 ```
-<%- data.x %>
+codespace v1.0.0
+
+  TODO... 
+
+Options
+
+  -h, --help       Display this usage guide. Each command has it's own help option if you want   
+                   to know more about a given command.                                           
+  -v, --version    Display only the version number                                               
+
+Commands
+
+  new   TODO... 
+  add   TODO... 
+
 codespace new <path-to-file>
 ```
 
