@@ -1,14 +1,12 @@
 import chalk from 'chalk';
 import minimist, { ParsedArgs } from 'minimist';
 import buildOptions from 'minimist-options';
-import * as addCmd from './add';
-import * as newCmd from './new';
 
-export const name = 'codespace';
+export const name = 'new';
 
-export const fqn = name;
+export const fqn = 'codespace.new';
 
-export const subCmds = [addCmd, newCmd];
+export const subCmds = [];
 
 export const parseArgv = (argv: string[]) =>
   minimist(
@@ -17,11 +15,6 @@ export const parseArgv = (argv: string[]) =>
       help: {
         type: 'boolean',
         alias: 'h',
-        default: false,
-      },
-      version: {
-        type: 'boolean',
-        alias: 'v',
         default: false,
       },
     }),

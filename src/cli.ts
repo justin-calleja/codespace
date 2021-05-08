@@ -8,6 +8,7 @@ import {
 } from 'argv-cmd-lib';
 import * as codespaceCmd from './cmds/codespace';
 import * as addCmd from './cmds/add';
+import * as newCmd from './cmds/new';
 
 const main = () => {
   const parsedCmd = parseCmdOrThrow(codespaceCmd, process.argv.slice(2));
@@ -19,6 +20,8 @@ const main = () => {
       ? [fqn, codespaceCmd.parseArgv(argv)]
       : fqn === addCmd.fqn
       ? [fqn, addCmd.parseArgv(argv)]
+      : fqn === newCmd.fqn
+      ? [fqn, newCmd.parseArgv(argv)]
       : // otherwise, don't parse argv:
         [fqn, argv],
   );
@@ -41,6 +44,10 @@ const main = () => {
     }
     case addCmd.fqn: {
       addCmd.run(parsedArgvLookup);
+      break;
+    }
+    case newCmd.fqn: {
+      newCmd.run(parsedArgvLookup);
       break;
     }
     default: {
