@@ -4,7 +4,8 @@ import { name } from './index';
 
 const mainSection = {
   header: `${name} v${getVersion()}`,
-  content: 'A tool to help you create, manage, and launch vscode workspaces.',
+  content:
+    'A tool to help you create, manage, and launch vscode workspaces.\n\nFor more info, visit https://github.com/justin-calleja/codespace',
 };
 
 export const getShortHelp = (): string => {
@@ -32,7 +33,7 @@ export const getHelp = (): string => {
       ],
     },
     {
-      header: 'Arguments',
+      header: 'Commands',
       content: [
         { name: 'new', summary: `TODO...` },
         { name: 'add', summary: `TODO...` },
