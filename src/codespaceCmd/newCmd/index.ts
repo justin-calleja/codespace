@@ -1,12 +1,10 @@
-import chalk from 'chalk';
-import minimist, { ParsedArgs } from 'minimist';
+import minimist from 'minimist';
 import buildOptions from 'minimist-options';
+import { name as parentCmdName } from '../index';
 
 export const name = 'new';
 
-export const fqn = 'codespace.new';
-
-export const subCmds = [];
+export const fqn = `${parentCmdName}.${name}`;
 
 export const parseArgv = (argv: string[]) =>
   minimist(
@@ -19,7 +17,3 @@ export const parseArgv = (argv: string[]) =>
       },
     }),
   );
-
-export const run = (parsedArgvLookup: { [fqn: string]: ParsedArgs }) => {
-  console.log(`Running ${fqn}...`);
-};

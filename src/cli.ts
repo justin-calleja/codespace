@@ -1,27 +1,37 @@
 #!/usr/bin/env node
 
-import chalk from 'chalk';
 import {
   parseCmdOrThrow,
   getParsedCmdNames,
   getNamedArgvs,
 } from 'argv-cmd-lib';
-import * as codespaceCmd from './cmds/codespace';
-import * as addCmd from './cmds/add';
-import * as newCmd from './cmds/new';
+import {
+  name,
+  fqn as codespaceFqn,
+  parseArgv as codespaceCmdParseArgv,
+} from './codespaceCmd';
+import { subCmds } from './codespaceCmd/subCmds';
+import {
+  fqn as codespaceNewFqn,
+  parseArgv as codespaceNewCmdParseArgv,
+} from './codespaceCmd/newCmd';
+import {
+  fqn as codespaceAddFqn,
+  parseArgv as codespaceAddCmdParseArgv,
+} from './codespaceCmd/addCmd';
 
 const main = () => {
-  const parsedCmd = parseCmdOrThrow(codespaceCmd, process.argv.slice(2));
+  const parsedCmd = parseCmdOrThrow({ name, subCmds }, process.argv.slice(2));
 
   const fullyQualifiedCmdNameToRun = getParsedCmdNames(parsedCmd).join('.');
   const namedArgvs = getNamedArgvs(parsedCmd);
   const namedParsedArgvs = namedArgvs.map(([fqn, argv]) =>
-    fqn === codespaceCmd.fqn
-      ? [fqn, codespaceCmd.parseArgv(argv)]
-      : fqn === addCmd.fqn
-      ? [fqn, addCmd.parseArgv(argv)]
-      : fqn === newCmd.fqn
-      ? [fqn, newCmd.parseArgv(argv)]
+    fqn === codespaceFqn
+      ? [fqn, codespaceCmdParseArgv(argv)]
+      : fqn === codespaceNewFqn
+      ? [fqn, codespaceNewCmdParseArgv(argv)]
+      : fqn === codespaceAddFqn
+      ? [fqn, codespaceAddCmdParseArgv(argv)]
       : // otherwise, don't parse argv:
         [fqn, argv],
   );
@@ -38,16 +48,25 @@ const main = () => {
   //   );
 
   switch (fullyQualifiedCmdNameToRun) {
-    case codespaceCmd.fqn: {
-      codespaceCmd.run(parsedArgvLookup);
+    case codespaceFqn: {
+      import('./codespaceCmd/run').then(({ run }) => {
+        run(parsedArgvLookup);
+      });
+
       break;
     }
-    case addCmd.fqn: {
-      addCmd.run(parsedArgvLookup);
+    case codespaceNewFqn: {
+      import('./codespaceCmd/newCmd/run').then(({ run }) => {
+        run(parsedArgvLookup);
+      });
+
       break;
     }
-    case newCmd.fqn: {
-      newCmd.run(parsedArgvLookup);
+    case codespaceAddFqn: {
+      import('./codespaceCmd/addCmd/run').then(({ run }) => {
+        run(parsedArgvLookup);
+      });
+
       break;
     }
     default: {

@@ -6,8 +6,7 @@
     "codespace": "./build/cli.js"
   },
   "scripts": {
-    "buildOld": "run-s clean compile chmodx",
-    "build": "jake",
+    "build": "run-s clean compile chmodx",
     "chmodx": "chmodx --package",
     "clean": "rimraf build/*",
     "compile": "tsc -p tsconfig.json",
