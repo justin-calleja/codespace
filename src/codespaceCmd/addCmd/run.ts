@@ -13,6 +13,11 @@ export const run = (parsedArgvLookup: { [fqn: string]: ParsedArgs }) => {
     process.exit(0);
   }
 
+  if (parsedArgs._.length < 2) {
+    console.log(chalk.redBright('Error:'), 'Requires 2 args');
+    process.exit(1);
+  }
+
   const workspacePath = parsedArgs._[0];
   const folderPathToAdd = isAbsolute(parsedArgs._[1])
     ? parsedArgs._[1]

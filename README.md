@@ -1,38 +1,15 @@
 # codespace
 
-TODO: generate parts of README.md with output of `--help` in commands.
-
-## new
+Basically allows easier setting up of a vscode workspace via:
 
 ```
-codespace new <path-to-file>
+codespace new <optional-path-uses-fallback-prompt>
 ```
 
-Path leading up to file with be created if it doesn't exist.
-
-## add
-
 ```
-codespace add
+codespace add <path-to-workspace> <path-to-new-folder>
 ```
 
-If you don't have a config file, one will be auto-created for you after running this command. If a `.config` directory is present in your home directory, then `$HOME/.config/codespace/config.json` will be created; otherwise, `$HOME/.codespace/config.json` will be created.
+See 
 
-You will be prompted for the root directory which houses your workspaces unless you have thee `rootDir` setting in your `config.json`, or you provide an arg with `-r` (args trump config):
-
-```
-codespace add -r ~/workspaces
-```
-
-You will be prompted for the name of the workspace to create
-
-root directory which houses your workspaces unless you have thee `rootDir` setting in your `config.json`, or you provide an arg with `-r` (args trump config):
-
-## open
-
-```
-codespace open <path-to-workspace-file>
-```
-
-If no path is given, then a list is shown and user can select. This list is effected by use of `add` / `open` / `remove`. Before showing the list, each entry is checked to exist first (i.e. checked to see if it's a JSON file and that it has a `folders` property). If this check passes, it is included in the list displayed; otherwise, it isn't.
-
+TODO...
