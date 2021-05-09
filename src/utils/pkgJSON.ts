@@ -1,5 +1,5 @@
 import { resolve } from 'path';
-import { readFileSync } from './fs';
+import { readFileSync } from 'fs';
 
 let pkgJSON: { [key: string]: any } | undefined;
 

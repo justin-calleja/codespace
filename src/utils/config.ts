@@ -1,15 +1,26 @@
+import { existsSync } from 'fs';
 import { homedir } from 'os';
 import { join } from 'path';
 
-// export const createHomeDir = (dirName: string): boolean => {
-// export const createHomeDir = (dirName: string): boolean => {
-// check if home dir has a .config in it, if so create there.
+export const configDirPath = existsSync(join(homedir(), '.config'))
+  ? join(homedir(), '.config', 'codespace')
+  : join(homedir(), '.codespace');
 
-//     return join(homedir(), )
+export const configPath = join(configDirPath, 'config.json');
 
-// }
-// check if home dir has a .config in it, if so create there.
+export const templatesDirPath = join(configDirPath, 'templates');
 
-//     return join(homedir(), )
+export const newTemplatePath = join(templatesDirPath, 'new.json');
 
-// }
+export const newTemplateJSON = `{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+  }
+}
+`;
+
+export const workspaceFileSuffix = 'code-workspace';
