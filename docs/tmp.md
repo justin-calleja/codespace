@@ -2,7 +2,20 @@
 
 
 ```
-<%- codespace.help %>
+codespace v1.0.0
+
+  A tool to help you create, manage, and launch vscode workspaces. 
+
+Options
+
+  -h, --help       Display this usage guide. Each command has it's own help option if you want   
+                   to know more about a given command.                                           
+  -v, --version    Display only the version number                                               
+
+Commands
+
+  new   TODO... 
+  add   TODO...
 ```
 
 ## new

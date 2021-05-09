@@ -17,7 +17,7 @@ task('build', () => {
 desc('Generate data files for use by ejs renderer');
 task('ejs-data', ['build'], () => {
   const { writeFileSync } = require('fs');
-  const { getHelp } = require(join(__dirname, 'build', 'cmds', 'codespace'));
+  const { getHelp } = require(join(__dirname, 'build', 'codespaceCmd', 'help'));
 
   mkdirp.sync(resolve(tmpJsonPath, '..'));
 
@@ -25,13 +25,13 @@ task('ejs-data', ['build'], () => {
     tmpJsonPath,
     JSON.stringify({
       codespace: {
-        help: stripAnsi(getHelp()),
+        help: stripAnsi(getHelp()).trim(),
       },
     }),
   );
 });
 
 desc('Generate tmp.md');
-task('default', ['ejs-data'], () => {
+task('ejs', ['ejs-data'], () => {
   exec(`${ejsPath} ${tmpEjsPath} -f ${tmpJsonPath} -o ${tmpMdPath}`);
 });
