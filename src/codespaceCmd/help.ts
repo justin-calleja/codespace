@@ -32,7 +32,7 @@ export const getHelp = (): string => {
       ],
     },
     {
-      header: 'Commands',
+      header: 'Arguments',
       content: [
         { name: 'new', summary: `TODO...` },
         { name: 'add', summary: `TODO...` },

@@ -2,10 +2,10 @@ import commandLineUsage from 'command-line-usage';
 import { ParsedArgs } from 'minimist';
 import { getVersion } from '../utils/pkgJSON';
 import { getHelp, getShortHelp } from './help';
-import { name } from './index';
+import { fqn } from './index';
 
 export const run = (parsedArgvLookup: { [fqn: string]: ParsedArgs }) => {
-  const parsedArgs = parsedArgvLookup[name];
+  const parsedArgs = parsedArgvLookup[fqn];
 
   if (parsedArgs.version) {
     console.log(getVersion());
