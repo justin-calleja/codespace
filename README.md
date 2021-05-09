@@ -10,6 +10,6 @@ codespace new <optional-path-uses-fallback-prompt>
 codespace add <path-to-workspace> <path-to-new-folder>
 ```
 
-See 
+See [help-output.md](./docs/help-output.md)
 
 TODO...
