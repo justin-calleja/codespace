@@ -26,8 +26,8 @@ export const getHelp = (): string => {
           summary: `The relative or absolute path of the workspace to add a folder to.`,
         },
         {
-          name: '<path-to-new-folder>',
-          summary: `The relative or absolute path of the new folder to add to the workspace.`,
+          name: '<paths-to-new-folders>...',
+          summary: `The relative or absolute path/s of the new folder/s to add to the workspace.`,
         },
       ],
     },
