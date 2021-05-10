@@ -33,43 +33,41 @@ export const run = (parsedArgvLookup: { [fqn: string]: ParsedArgs }) => {
     {},
   );
 
-  const folderPathsToAdd = parsedArgs._.slice(1);
+  const folderPaths = parsedArgs._.slice(1);
 
-  const [newPathsToAdd, pathsAlreadyInWorkspace] = folderPathsToAdd.reduce(
-    (acc: [string[], string[]], pathToAdd) => {
-      const absPathToAdd = isAbsolute(pathToAdd)
+  const [newPaths, existingPaths] = folderPaths.reduce<
+    [Set<string>, Set<string>]
+  >(
+    (acc, pathToAdd): [Set<string>, Set<string>] => {
+      const absPath = isAbsolute(pathToAdd)
         ? pathToAdd
         : resolve(process.cwd(), pathToAdd);
 
-      if (absPathDict[absPathToAdd] === true) {
-        acc[1].push(absPathToAdd);
+      if (absPathDict[absPath]) {
+        acc[1].add(absPath);
       } else {
-        acc[0].push(absPathToAdd);
+        acc[0].add(absPath);
       }
 
       return acc;
     },
-    [[], []],
+    [new Set(), new Set()],
   );
 
-  for (const path of pathsAlreadyInWorkspace) {
+  for (const path of existingPaths) {
     console.log(
       chalk.yellowBright('Warning:'),
       `${path} already exists as a folder in ${workspacePath}`,
     );
   }
 
-  // TODO: filter out any duplicates in newPathsToAdd...
-  // e.g. codespace add ./tmp.code-workspace ../github/a ../github/b  ../github/a
-  // should only add ../github/a once.
-
   workspaceJSON.folders = [
     ...workspaceJSON.folders,
-    ...newPathsToAdd.map((path) => ({ path })),
+    ...Array.from(newPaths).map((path) => ({ path })),
   ];
   writeFileSync(workspacePath, JSON.stringify(workspaceJSON, null, 2));
 
-  for (const path of newPathsToAdd) {
+  for (const path of newPaths) {
     console.log(chalk.blueBright('Info:'), `Added ${path} to ${workspacePath}`);
   }
 };
