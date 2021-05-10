@@ -18,4 +18,4 @@ code ./generated-workspace-file
 
 See [help-output.md](./docs/help-output.md)
 
-TODO...
+NOTE: this is still a WIP. To run locally, clone, `npm i`, `npm run build`, `npm link`.

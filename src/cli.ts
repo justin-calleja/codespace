@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+import fromEntries from 'object.fromentries';
 import {
   parseCmdOrThrow,
   getParsedCmdNames,
@@ -36,7 +37,7 @@ const main = () => {
         [fqn, argv],
   );
 
-  const parsedArgvLookup = Object.fromEntries(namedParsedArgvs);
+  const parsedArgvLookup = fromEntries(namedParsedArgvs);
 
   switch (fullyQualifiedCmdNameToRun) {
     case codespaceFqn: {
