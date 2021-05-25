@@ -21,16 +21,8 @@ export const run = (parsedArgvLookup: { [fqn: string]: ParsedArgs }) => {
   const workspacePath = parsedArgs._[0];
   const workspaceJSON = JSON.parse(readFileSync(workspacePath).toString());
 
-  const absPathDict = workspaceJSON.folders.reduce(
-    (acc: { [key: string]: boolean }, { path }: { path: string }) => {
-      const absPath = isAbsolute(path)
-        ? path
-        : resolve(workspacePath, '..', path);
-
-      acc[absPath] = true;
-      return acc;
-    },
-    {},
+  const absPaths = workspaceJSON.folders.map(({ path }: { path: string }) =>
+    isAbsolute(path) ? path : resolve(workspacePath, '..', path),
   );
 
   const folderPaths = parsedArgs._.slice(1);
@@ -43,12 +35,7 @@ export const run = (parsedArgvLookup: { [fqn: string]: ParsedArgs }) => {
         ? pathToAdd
         : resolve(process.cwd(), pathToAdd);
 
-      if (absPathDict[absPath]) {
-        acc[1].add(absPath);
-      } else {
-        acc[0].add(absPath);
-      }
-
+      acc[absPaths.includes(absPath) ? 1 : 0].add(absPath);
       return acc;
     },
     [new Set(), new Set()],
