@@ -20,6 +20,10 @@ import {
   fqn as codespaceAddFqn,
   parseArgv as codespaceAddCmdParseArgv,
 } from './codespaceCmd/addCmd';
+import {
+  fqn as codespaceExcludeOthersFqn,
+  parseArgv as codespaceExcludeOthersCmdParseArgv,
+} from './codespaceCmd/excludeOthersCmd';
 
 const main = () => {
   const parsedCmd = parseCmdOrThrow({ name, subCmds }, process.argv.slice(2));
@@ -33,6 +37,8 @@ const main = () => {
       ? [fqn, codespaceNewCmdParseArgv(argv)]
       : fqn === codespaceAddFqn
       ? [fqn, codespaceAddCmdParseArgv(argv)]
+      : fqn === codespaceExcludeOthersFqn
+      ? [fqn, codespaceExcludeOthersCmdParseArgv(argv)]
       : // otherwise, don't parse argv:
         [fqn, argv],
   );
@@ -56,6 +62,13 @@ const main = () => {
     }
     case codespaceAddFqn: {
       import('./codespaceCmd/addCmd/run').then(({ run }) => {
+        run(parsedArgvLookup);
+      });
+
+      break;
+    }
+    case codespaceExcludeOthersFqn: {
+      import('./codespaceCmd/excludeOthersCmd/run').then(({ run }) => {
         run(parsedArgvLookup);
       });
 
